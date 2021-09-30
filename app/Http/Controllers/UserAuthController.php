@@ -42,7 +42,7 @@ class UserAuthController extends Controller
 
     function check(Request $request) {
         $request->validate([
-            'email'=>'required|email|unique:user_auths',
+            'email'=>'required|email',
             'password'=>'required|min:5'
         ]);
 
