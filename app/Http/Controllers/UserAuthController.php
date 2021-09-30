@@ -49,7 +49,7 @@ class UserAuthController extends Controller
         $user = UserAuth::where('email','=', $request->email)->first();
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
-                if ($request->status == 1) {
+                if ($user->status == 1) {
                     $request->session()->put('LoggedUser',$user->id);
                     return redirect('admin');
                 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
-    <link rel="stylesheet" href="{{asset('public/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{asset('/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
 </head>
 
 <body>

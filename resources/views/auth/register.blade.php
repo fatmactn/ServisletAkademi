@@ -7,7 +7,7 @@
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register Page</title>
-    <link rel="stylesheet" href="{{asset('public/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{asset('/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
                         @endif
                 </div>
                 <div class="form-group">
-                    <label for="name">eMail</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Enter full name" value="{{
                         old('name')}}">
                     <span class="text-danger">@error('name'){{$message}} @enderror</span>

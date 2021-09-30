@@ -7,7 +7,7 @@
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Login Page</title>
-        <link rel="stylesheet" href="{{asset('public/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{asset('/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
     </head>
 
 <body>
@@ -16,7 +16,7 @@
     <div class="row" style="margin-top: 45px">
         <div class="col-md-4 col-md-offset-4">
             <h4>User Login</h4>
-            br
+            <br>
             <form action="{{route('auth.check')}}" method="post">
                 @csrf
                 <div class="results">
