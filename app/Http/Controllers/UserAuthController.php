@@ -20,7 +20,7 @@ class UserAuthController extends Controller
     function create(Request $request){
         $request->validate([
             'name'=>'required',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:user_auths',
             'password'=>'required|min:5'
         ]);
 
@@ -42,7 +42,7 @@ class UserAuthController extends Controller
 
     function check(Request $request) {
         $request->validate([
-            'email'=>'required|email',
+            'email'=>'required|email|unique:user_auths',
             'password'=>'required|min:5'
         ]);
 

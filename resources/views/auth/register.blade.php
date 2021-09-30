@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="email">email</label>
                     <input type="text" class="form-control" name="email" placeholder="Enter email" value="{{
-                        old('name')}}">
+                        old('email')}}">
                     <span class="text-danger">@error('email'){{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
