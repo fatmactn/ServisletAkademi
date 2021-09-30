@@ -20,8 +20,8 @@
                 </table>
                 <tbody>
                     <tr>
-                        <td>{{$LoggedUserInfo->name}}</td>
-                        <td>{{$LoggedUserInfo->email}}</td>
+                        <td>namename</td>
+                        <td>mailmail</td>
                         <td><a href="logout">Logout</a> </td>
                     </tr>
                 </tbody>

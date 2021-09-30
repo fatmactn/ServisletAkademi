@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\UserAuth;
 
 class UserAuthController extends Controller
 {
@@ -20,24 +20,12 @@ class UserAuthController extends Controller
     function create(Request $request){
         $request->validate([
             'name'=>'required',
-            'email'=>'required|email|unique:user_auths',
+            'email'=>'required|email|unique:users',
             'password'=>'required|min:5'
         ]);
 
-        //UserAuth::create($request->post());
-
-        $user = new UserAuth();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $query = $user->save();
-
-        if ($query) {
-            return back()->with('success','You have been successfuly registered');
-        }
-        else {
-            return back()->with('fail','Failed!');
-        }
+        User::create($request->post());
+        return back()->with('success','You have been successfuly registered');
     }
 
     function check(Request $request) {
@@ -46,41 +34,34 @@ class UserAuthController extends Controller
             'password'=>'required|min:5'
         ]);
 
-        $user = UserAuth::where('email','=', $request->email)->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                if ($user->status == 1) {
-                    $request->session()->put('LoggedUser',$user->id);
-                    return redirect('admin');
-                }
-                else {
-                    return back()->with('fail','You are not authorized!');
-                }
-            }
-            else {
-                return back()->with('fail','Invalid password!');
-            }
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('admin')
+                ->withSuccess('Signed in');
         }
         else {
-            return back()->with('fail','Account is not found!');
+            return redirect()->back()->with('fail','You are not authorized');
         }
     }
 
     function admin() {
-
-        if (session()->has('LoggedUser')) {
-            $user = UserAuth::where('id','=', session('LoggedUser'))->first();
-            $data = [
-                'LoggedUserInfo'=>$user
-            ];
+        if (!Auth::check()){
+            return redirect()->back()->with('fail','You are not logged in');
         }
-        return view('admin.admin', $data);
+        elseif(auth()->user()->status !== 1 )
+        {
+            return redirect()->back()->with('fail','You are not authorized');
+        }
+        else
+        {
+            return view('admin.admin');
+        }
+
     }
 
     function logout() {
-
-        if(session()->has('LoggedUser')) {
-            session()->pull('LoggedUser');
+        if(Auth::check()) {
+            Auth::logout();
             return redirect('login');
         }
     }
