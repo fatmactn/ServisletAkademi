@@ -7,7 +7,7 @@
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register Page</title>
-    <link rel="stylesheet" href="{{asset('/styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{asset('styles/bootstrap-3.1.1/css/bootstrap.min.css') }}">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
                     <span class="text-danger">@error('name'){{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
-                    <label for="email">eMail</label>
+                    <label for="email">email</label>
                     <input type="text" class="form-control" name="email" placeholder="Enter email" value="{{
                         old('name')}}">
                     <span class="text-danger">@error('email'){{$message}} @enderror</span>
@@ -53,7 +53,7 @@
                     <button type="submit" class="btn btn-block btn-primary">Register</button>
                 </div>
                 <br>
-                <a href="login"> I already have an account"></a>
+                <a href="login"> I already have an account</a>
             </form>
         </div>
     </div>

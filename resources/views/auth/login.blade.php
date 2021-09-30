@@ -41,7 +41,7 @@
                     <button type="submit" class="btn btn-block btn-primary">Login</button>
                 </div>
                 <br>
-                <a href="register"> Create a new Account now"></a>
+                <a href="register"> Create a new Account now</a>
             </form>
         </div>
     </div>
