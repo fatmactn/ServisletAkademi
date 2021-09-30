@@ -50,7 +50,8 @@ class UserAuthController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 if ($request->status == 1) {
-                    return back()->with('success','You have been successfuly logined');
+                    $request->session()->put('LoggedUser',$user->id);
+                    return redirect('admin');
                 }
                 else {
                     return back()->with('fail','You are not authorized!');
@@ -62,6 +63,25 @@ class UserAuthController extends Controller
         }
         else {
             return back()->with('fail','Account is not found!');
+        }
+    }
+
+    function admin() {
+
+        if (session()->has('LoggedUser')) {
+            $user = UserAuth::where('id','=', session('LoggedUser'))->first();
+            $data = [
+                'LoggedUserInfo'=>$user
+            ];
+        }
+        return view('admin.admin', $data);
+    }
+
+    function logout() {
+
+        if(session()->has('LoggedUser')) {
+            session()->pull('LoggedUser');
+            return redirect('login');
         }
     }
 
