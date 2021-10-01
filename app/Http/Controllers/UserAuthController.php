@@ -9,58 +9,61 @@ use Illuminate\Support\Facades\Hash;
 
 class UserAuthController extends Controller
 {
-    function login(){
+    function login()
+    {
         return view('auth.login');
     }
 
-    function register(){
+    function register()
+    {
         return view('auth.register');
     }
 
-    function create(Request $request){
+    function create(Request $request)
+    {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:5'
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5'
         ]);
 
-        User::create($request->post());
-        return back()->with('success','You have been successfuly registered');
+        $request->merge(['password' => Hash::make(request('password'))]);
+        User::create($request->except('_token'));
+
+        return redirect()->back()->with('success', 'You have been successfully registered');
     }
 
-    function check(Request $request) {
+    function check(Request $request)
+    {
         $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:5'
+            'email' => 'required|email',
+            'password' => 'required|min:5'
         ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('admin')
                 ->withSuccess('Signed in');
-        }
-        else {
-            return redirect()->back()->with('fail','You are not authorized');
+        } else {
+            return redirect('login')->with('fail', 'You are not authorized');
         }
     }
 
-    function admin() {
-        if (!Auth::check()){
-            return redirect()->back()->with('fail','You are not logged in');
-        }
-        elseif(auth()->user()->status !== 1 )
-        {
-            return redirect()->back()->with('fail','You are not authorized');
-        }
-        else
-        {
+    function admin()
+    {
+        if (!Auth::check()) {
+            return redirect('login')->with('fail', 'You are not logged in');
+        } elseif (auth()->user()->status !== 1) {
+            return redirect('login')->with('fail', 'You are not authorized');
+        } else {
             return view('admin.admin');
         }
 
     }
 
-    function logout() {
-        if(Auth::check()) {
+    function logout()
+    {
+        if (Auth::check()) {
             Auth::logout();
             return redirect('login');
         }
