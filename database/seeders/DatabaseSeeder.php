@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployeeSeeder::class);
         $this->call(OfficeImageSeeder::class);
         $this->call(QuestionSeeder::class);
-        $this->call(UserAuthSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

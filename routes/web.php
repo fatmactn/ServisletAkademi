@@ -26,6 +26,6 @@ Route::get('login',[UserAuthController::class, 'login']);
 Route::get('register',[UserAuthController::class, 'register']);
 Route::post('create',[UserAuthController::class, 'create'])->name('auth.create');
 Route::post('check',[UserAuthController::class, 'check'])->name('auth.check');
-Route::get('admin',[UserAuthController::class, 'admin']);
+Route::get('admin',[UserAuthController::class, 'admin'])->middleware('web');
 Route::get('logout',[UserAuthController::class, 'logout']);
 
