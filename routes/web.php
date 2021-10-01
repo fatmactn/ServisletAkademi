@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +22,9 @@ Route::get('/akademi', function () {
     return view('welcome');
 });
 
-Route::get('login',[UserAuthController::class, 'login']);
-Route::get('register',[UserAuthController::class, 'register']);
+Route::get('login',[UserAuthController::class, 'login'])->name('login');
+Route::get('register',[UserAuthController::class, 'register'])->name('register');
 Route::post('create',[UserAuthController::class, 'create'])->name('auth.create');
 Route::post('check',[UserAuthController::class, 'check'])->name('auth.check');
 Route::get('admin',[UserAuthController::class, 'admin'])->middleware('web');
-Route::get('logout',[UserAuthController::class, 'logout']);
+Route::get('logout',[UserAuthController::class, 'logout'])->name('logout');

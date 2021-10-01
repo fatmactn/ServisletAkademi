@@ -56,7 +56,7 @@ class UserAuthController extends Controller
         } elseif (auth()->user()->status !== 1) {
             return redirect('login')->with('fail', 'You are not authorized');
         } else {
-            return view('admin.admin');
+            return view('frontlayout');
         }
 
     }
