@@ -19,6 +19,7 @@ class CreateFormsTable extends Migration
             $table->string('mail');
             $table->string('resumePath');
             $table->string('linkedinUrl');
+            $table->boolean('isKvkk');
             $table->timestamps();
         });
     }
